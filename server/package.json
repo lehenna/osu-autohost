@@ -1,0 +1,38 @@
+{
+  "name": "@osu-autohost/server",
+  "author": {
+    "email": "lehenna@outlook.com",
+    "name": "Lehenna",
+    "url": "https://lehenna.com/"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "bun --watch run src/index.ts",
+    "build": "NODE_ENV=production bun build src/index.ts --outdir ./dist --target bun --minify --external rosu-pp-js --external irc"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bancho.js": "^0.11.6",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "drizzle-orm": "^0.34.1",
+    "express": "^4.21.1",
+    "irc": "^0.5.2",
+    "morgan": "^1.10.0",
+    "nanoid": "3.3.4",
+    "next": "^14.2.15",
+    "nodesu": "^0.7.3",
+    "rosu-pp-js": "^1.1.0",
+    "socket.io": "^4.8.0",
+    "valibot": "^0.42.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/irc": "^0.5.4",
+    "@types/morgan": "^1.9.9",
+    "drizzle-kit": "^0.25.0"
+  }
+}

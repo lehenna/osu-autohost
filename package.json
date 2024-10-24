@@ -1,0 +1,26 @@
+{
+  "name": "osu-autohost",
+  "version": "0.1.0",
+  "author": {
+    "email": "lehenna@outlook.com",
+    "name": "Lehenna",
+    "url": "https://lehenna.com/"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "website",
+    "server"
+  ],
+  "scripts": {
+    "build": "bun run build.ts"
+  },
+  "devDependencies": {
+    "@types/archiver": "^6.0.2",
+    "@types/bun": "^1.1.11",
+    "@types/fs-extra": "^11.0.4"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "fs-extra": "^11.2.0"
+  }
+}

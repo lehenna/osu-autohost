@@ -1,0 +1,7 @@
+node_modules/
+releases/
+dist
+build
+settings.json
+.env.local
+.env
