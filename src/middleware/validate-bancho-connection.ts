@@ -5,11 +5,19 @@ export const validateBanchoConnection = createMiddleware(
   async (req, res, next) => {
     const banchoClientStatus = Bancho.status();
     const banchoClientIsConnected = banchoClientStatus.connected;
+    if (req.url.startsWith("/api/credentials")) {
+      if (banchoClientIsConnected) {
+        res.redirect("/dashboard");
+        return;
+      }
+      next();
+      return;
+    }
     if (!banchoClientIsConnected && req.url !== "/setup") {
       res.redirect("/setup");
       return;
     }
-    if (req.url === "/setup") {
+    if (banchoClientIsConnected && req.url === "/setup") {
       res.redirect("/dashboard");
       return;
     }

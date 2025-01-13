@@ -24,7 +24,7 @@ OAuthRoutes.get("/callback", async (req, res) => {
     return;
   }
   res.cookie("osu_session", token);
-  res.redirect("/");
+  res.redirect("/dashboard");
 });
 
 export { OAuthRoutes };

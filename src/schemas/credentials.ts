@@ -1,6 +1,5 @@
 import {
   boolean,
-  maxValue,
   minLength,
   minValue,
   number,
@@ -32,7 +31,7 @@ export const credentialsSchema = object({
     password: pipe(string(), minLength(2)),
     apiKey: pipe(string(), minLength(2)),
     host: pipe(string(), minLength(2)),
-    port: pipe(number(), minValue(0), maxValue(3)),
+    port: pipe(number(), minValue(0)),
     botAccount: boolean(),
   }),
 });

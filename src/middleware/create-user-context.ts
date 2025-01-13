@@ -4,7 +4,7 @@ import { UserRole } from "@/lib/user-roles";
 import { findOrCreateUser } from "@/utils/find-or-create-user";
 
 export const createUserContext = createMiddleware(async (req, res, next) => {
-  if (req.url.startsWith("/oauth")) {
+  if (req.url.startsWith("/oauth") || req.url.startsWith("/credentials")) {
     next();
     return;
   }
