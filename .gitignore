@@ -1,0 +1,6 @@
+.next/
+build/
+node_modules/
+prisma/migrations/
+prisma/db.db
+credentials.txt
