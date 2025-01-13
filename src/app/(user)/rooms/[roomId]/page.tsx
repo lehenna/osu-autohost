@@ -2,8 +2,10 @@
 
 import { Authorize } from "@/components/authorize";
 import { BeatmapCard } from "@/components/beatmap-card";
+import { CloseRoom } from "@/components/close-room";
 import { ClockIcon } from "@/components/icons/clock";
 import { StarIcon } from "@/components/icons/star";
+import { CustomLink } from "@/components/link";
 import { RoomChat } from "@/components/room-chat";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -11,7 +13,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRoomContext } from "@/context/room";
 import { getOsuModeName } from "@/utils/get-osu-mode-name";
 import { secondsToString } from "@/utils/seconds-to-string";
-import Link from "next/link";
 
 export default function RoomPage() {
   const room = useRoomContext();
@@ -41,7 +42,7 @@ export default function RoomPage() {
         </div>
         <Authorize permission="rooms.edit">
           <Button size="sm" asChild>
-            <Link href={`/rooms/${room.id}/edit`}>Edit Room</Link>
+            <CustomLink href={`/rooms/${room.id}/edit`}>Edit Room</CustomLink>
           </Button>
         </Authorize>
       </CardHeader>
@@ -69,6 +70,9 @@ export default function RoomPage() {
           <h3 className="text-lg font-medium mb-2.5">Chat</h3>
           <RoomChat roomId={room.id} />
         </section>
+        <Authorize permission="rooms.remove">
+          <CloseRoom roomId={room.id} />
+        </Authorize>
       </CardContent>
     </Card>
   );

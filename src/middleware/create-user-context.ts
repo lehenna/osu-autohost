@@ -10,14 +10,14 @@ export const createUserContext = createMiddleware(async (req, res, next) => {
   }
   const { osu_session } = req.cookies;
   if (!osu_session) {
-    res.status(400).json({
+    res.status(401).json({
       message: "Osu session is required.",
     });
     return;
   }
   const session = await OAuth.user(osu_session);
   if (!session) {
-    res.status(400).json({
+    res.status(401).json({
       message: "Session not found.",
     });
     return;

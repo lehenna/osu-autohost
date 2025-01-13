@@ -1,11 +1,11 @@
 import type { BeatmapDetails } from "@/utils/get-beatmap-details";
-import Link from "next/link";
 import { ClockIcon } from "./icons/clock";
 import { StarIcon } from "./icons/star";
+import { CustomLink } from "./link";
 
 export function BeatmapCard(beatmap: BeatmapDetails) {
   return (
-    <Link href={beatmap.downloadLink} target="_blank">
+    <CustomLink href={beatmap.downloadLink} target="_blank">
       <article className="relative w-full h-[11rem] rounded-md overflow-hidden">
         <img
           className="absolute w-full h-full object-cover brightness-50"
@@ -39,6 +39,6 @@ export function BeatmapCard(beatmap: BeatmapDetails) {
           </div>
         </div>
       </article>
-    </Link>
+    </CustomLink>
   );
 }

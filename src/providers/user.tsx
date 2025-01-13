@@ -1,25 +1,15 @@
 "use client";
 
-import { User } from "@prisma/client";
+import { UserData, useUser } from "@/hooks/user";
 import { UserContext } from "../context/user";
-import { useEffect, useState } from "react";
-import { socket } from "@/lib/socket";
-import { UserRole } from "@/lib/user-roles";
 
 export function UserProvider({
   children,
-  user: defaultUser,
+  user: userData,
 }: {
   children: React.ReactNode;
-  user: User & { role: UserRole };
+  user: UserData;
 }) {
-  const [user, setUser] = useState(defaultUser);
-  useEffect(() => {
-    socket.on("userUpdated", (raw) => {
-      const updatedUser = JSON.parse(raw) as User & { role: UserRole };
-      if (user.id !== updatedUser.id) return;
-      setUser(updatedUser);
-    });
-  }, [user]);
+  const user = useUser(userData);
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }

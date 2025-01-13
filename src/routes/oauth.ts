@@ -3,9 +3,8 @@ import { OAuth } from "@/lib/oauth";
 
 const OAuthRoutes = Router();
 
-OAuthRoutes.get("/authorize", async (req, res) => {
-  const url = OAuth.redirectUrl;
-  res.redirect(url);
+OAuthRoutes.get("/authorize", (req, res) => {
+  res.redirect(OAuth.redirectUrl);
 });
 
 OAuthRoutes.get("/callback", async (req, res) => {
@@ -23,7 +22,9 @@ OAuthRoutes.get("/callback", async (req, res) => {
     });
     return;
   }
-  res.cookie("osu_session", token);
+  res.cookie("osu_session", token, {
+    maxAge: 24 * 60 * 60 * 1000,
+  });
   res.redirect("/dashboard");
 });
 

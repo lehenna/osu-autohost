@@ -1,13 +1,13 @@
 import type { Room } from "@/models/room";
 import { getOsuModeName } from "@/utils/get-osu-mode-name";
-import Link from "next/link";
 import { StarIcon } from "./icons/star";
 import { ClockIcon } from "./icons/clock";
 import { secondsToString } from "@/utils/seconds-to-string";
+import { CustomLink } from "./link";
 
 export function RoomCard(room: Room) {
   return (
-    <Link href={`/rooms/${room.id}`}>
+    <CustomLink href={`/rooms/${room.id}`}>
       <article className="relative w-full h-[11rem] overflow-hidden group">
         <header className="relative w-full h-full">
           <img
@@ -51,6 +51,6 @@ export function RoomCard(room: Room) {
           </p>{" "}
         </section>
       </article>
-    </Link>
+    </CustomLink>
   );
 }

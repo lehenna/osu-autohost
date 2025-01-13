@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { Authorize } from "@/components/authorize";
 import { ListRooms } from "@/components/list-rooms";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CustomLink } from "@/components/link";
 
 export default function DashboardPage() {
   return (
@@ -13,7 +13,7 @@ export default function DashboardPage() {
           <CardTitle>Rooms</CardTitle>
           <Authorize permission="rooms.create">
             <Button size="sm" asChild>
-              <Link href="/rooms/create">Create Room</Link>
+              <CustomLink href="/rooms/create">Create Room</CustomLink>
             </Button>
           </Authorize>
         </CardHeader>
@@ -28,7 +28,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <Button asChild>
-              <Link href="/users">Go to users dashboard</Link>
+              <CustomLink href="/users">Go to users dashboard</CustomLink>
             </Button>
           </CardContent>
         </Card>

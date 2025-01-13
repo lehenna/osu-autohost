@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Card, CardContent, CardHeader } from "./ui/card";
+import { CustomLink } from "./link";
 
 interface Command {
   name: string;
@@ -75,13 +75,13 @@ export function Commands() {
         <p className="mb-4">
           Below you will find the available commands, if you have questions or
           consider that you should add other commands, do not hesitate to{" "}
-          <Link
+          <CustomLink
             className="text-blue-500 transition-[color] hover:text-blue-500/80"
-            href="/dm"
+            href="https://osu.ppy.sh/users/36780673"
             target="_blank"
           >
             contact us
-          </Link>{" "}
+          </CustomLink>{" "}
           via DM.
         </p>
         <ul className="grid gap-2.5">

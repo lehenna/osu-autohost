@@ -8,6 +8,10 @@ import { Router } from "express";
 
 const UsersRoutes = Router();
 
+UsersRoutes.get("/me", (req, res) => {
+  res.status(200).json(req.user);
+});
+
 UsersRoutes.get("/", validateUserPermission("users.list"), async (req, res) => {
   const users = await db.user.findMany();
   res.status(200).json(users);

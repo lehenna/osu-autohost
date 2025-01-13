@@ -1,7 +1,8 @@
 "use client";
-import Link from "next/link";
+
 import { Brand } from "./brand";
 import { Button } from "./ui/button";
+import { CustomLink } from "./link";
 
 export function BasicNavbar({
   hideDashboardButton,
@@ -13,7 +14,7 @@ export function BasicNavbar({
       <Brand />
       {!hideDashboardButton ? (
         <Button asChild>
-          <Link href="/dashboard">Dashboard</Link>
+          <CustomLink href="/dashboard">Dashboard</CustomLink>
         </Button>
       ) : null}
     </header>

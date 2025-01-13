@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+
 import { ChevronDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { useUserContext } from "@/context/user";
+import { CustomLink } from "./link";
 
 export function UserDropdown() {
   const user = useUserContext();
@@ -25,10 +26,10 @@ export function UserDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
-          <Link href="/dashboard">Dashboard</Link>
+          <CustomLink href="/dashboard">Dashboard</CustomLink>
         </DropdownMenuItem>
         <DropdownMenuItem className="!text-red-500" asChild>
-          <Link href="/logout">Logout</Link>
+          <CustomLink href="/logout">Logout</CustomLink>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

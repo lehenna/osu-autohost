@@ -17,6 +17,7 @@ import { OAuthRoutes } from "./routes/oauth";
 import { CredentialsRoutes } from "./routes/credentials";
 import { RoomRoutes } from "./routes/rooms";
 import { UsersRoutes } from "./routes/users";
+import { validateUserSession } from "./middleware/validate-user-session";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -44,6 +45,7 @@ app.prepare().then(async () => {
   app.use(express.json());
   app.use(cookieParser());
   app.use(validateBanchoConnection);
+  app.use(validateUserSession);
   app.use("/api", createUserContext);
   app.use("/api/oauth", OAuthRoutes);
   app.use("/api/credentials", CredentialsRoutes);
@@ -68,7 +70,6 @@ app.prepare().then(async () => {
     io.sockets.emit("roomUpdated", JSON.stringify(room));
   });
   websocket.on("roomMessage", (message) => {
-    console.info(message);
     io.sockets.emit("roomMessage", JSON.stringify(message));
   });
   websocket.on("roomClosed", (roomId) => {

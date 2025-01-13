@@ -1,6 +1,15 @@
 import { API } from "@/lib/axios";
 import { User } from "@prisma/client";
 
+export async function getUserSession(): Promise<User | null> {
+  try {
+    const res = await API.get(`/api/users/me`);
+    return res.data;
+  } catch {
+    return null;
+  }
+}
+
 export async function getUsers(): Promise<User[]> {
   try {
     const res = await API.get(`/api/users`);
