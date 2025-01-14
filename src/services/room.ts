@@ -13,6 +13,7 @@ import { startCommand } from "../commands/start";
 import { stopCommand } from "../commands/stop";
 import { timeLeftCommand } from "../commands/timeleft";
 import { Bancho } from "@/lib/bancho";
+import { websocket } from "@/lib/websocket";
 
 const commands = [
   startCommand,
@@ -44,6 +45,13 @@ export class RoomServices {
     const newRoomModel = new RoomModel(multi, options);
     newRoomModel.addCommands(commands);
     this.rooms.push(newRoomModel);
+
+    websocket.on("roomClosed", (roomId) => {
+      const roomIndex = this.rooms.findIndex((room) => room.id === roomId);
+      if (roomIndex < 0) return;
+      this.rooms.splice(roomIndex, 1);
+    });
+
     return newRoomModel.data();
   }
 
@@ -68,5 +76,6 @@ export class RoomServices {
     const RoomModel = this.rooms[roomIndex];
     await RoomModel.remove();
     this.rooms.splice(roomIndex, 1);
+    websocket.emit("roomClosed", roomId);
   }
 }

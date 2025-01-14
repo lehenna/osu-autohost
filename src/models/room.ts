@@ -127,6 +127,11 @@ export class RoomModel {
 
     multi.on("message", async ({ content, user: banchoUser }) => {
       const user = await findOrCreateUser(banchoUser);
+      if (user.username === "BanchoBot") {
+        if (content.toLowerCase() === "closed the match") {
+          websocket.emit("roomClosed", this.id);
+        }
+      }
       const moment = Date.now();
       websocket.emit("roomMessage", {
         id: `${moment}-${user.id}-${nanoid(10)}`,
@@ -156,6 +161,7 @@ export class RoomModel {
       if (validation.success === false) {
         await this.setLastBeatmap();
         await this.send(validation.message);
+        this.strikes++;
         await this.validateStrikes();
         return;
       }

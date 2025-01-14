@@ -1,10 +1,10 @@
 "use client";
 
-import NotFound from "next/error";
 import { RoomProvider } from "@/providers/room";
 import { useRoom } from "@/hooks/room";
 import { Spinner } from "@/components/ui/spinner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import NotFound from "@/app/not-found";
 
 export default function RoomLayout({
   children,
@@ -24,6 +24,6 @@ export default function RoomLayout({
       </Card>
     );
   }
-  if (!room) return <NotFound statusCode={404} />;
+  if (!room) return <NotFound />;
   return <RoomProvider room={room}>{children}</RoomProvider>;
 }

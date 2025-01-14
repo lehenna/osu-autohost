@@ -22,7 +22,7 @@ export const skipCommand: CreateCommandFunction = (room) => {
       if (votes.includes(user.id)) return;
       votes.push(user.id);
       const totalVotes = votes.length;
-      const requiredVotes = room.queue.length / 2 + 1;
+      const requiredVotes = Math.trunc(room.queue.length / 2 + 1);
       await room.send(`Votes to skip (${totalVotes}/${requiredVotes})`);
       if (totalVotes >= requiredVotes) {
         await room.nextHost();
