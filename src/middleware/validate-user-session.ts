@@ -5,7 +5,7 @@ import { findOrCreateUser } from "@/utils/find-or-create-user";
 import { UserCookie } from "@/utils/user-cookie";
 
 export const validateUserSession = createMiddleware(async (req, res, next) => {
-  if (req.url.startsWith("/api") || req.url === "/" || "/setup") {
+  if (req.url.startsWith("/api") || req.url === "/" || req.url === "/setup") {
     next();
     return;
   }
