@@ -304,7 +304,7 @@ export class RoomModel {
       await this.multi.lobby.setName(data.name);
     }
     if (typeof data.gamemode === "number") this.gamemode = data.gamemode;
-    if (data.password && data.password !== this.password) {
+    if (typeof data.password === "string" && data.password !== this.password) {
       this.password = data.password;
       await this.multi.lobby.setPassword(data.password);
     }
