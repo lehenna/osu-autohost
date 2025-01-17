@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { CustomLink } from "./link";
 
 interface Command {
@@ -65,11 +65,19 @@ const commands: Command[] = [
   },
 ];
 
+const moderationCommands: Command[] = [
+  {
+    name: "ban",
+    description: "Ban or unban a user by their ID.",
+    example: "!ban #000000",
+  },
+];
+
 export function Commands() {
   return (
     <Card>
       <CardHeader>
-        <h2 className="text-xl font-medium text-white">Commands</h2>
+        <CardTitle>Commands</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="mb-4">
@@ -84,13 +92,40 @@ export function Commands() {
           </CustomLink>{" "}
           via DM.
         </p>
-        <ul className="grid gap-2.5">
+        <h4 className="font-medium mb-4">Common</h4>
+        <ul className="grid gap-2.5 mb-8">
           <li className="grid grid-cols-9 gap-4 text-sm font-medium text-white">
             <span className="col-span-2">Name</span>
             <span className="col-span-4">Description</span>
             <span className="col-span-3">Example</span>
           </li>
           {commands.map((command) => (
+            <li className="grid grid-cols-9 gap-4" key={command.name}>
+              <span className="col-span-2 flex items-center gap-1">
+                <span className="rounded-sm bg-zinc-800 text-white text-xs px-2 h-6 grid place-items-center">
+                  {command.name}
+                </span>
+                {command.shortname ? (
+                  <span className="rounded-sm bg-zinc-800 text-white text-xs px-2 h-6 grid place-items-center">
+                    {command.shortname}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </span>
+              <span className="col-span-4">{command.description}</span>
+              <span className="col-span-3">{command.example}</span>
+            </li>
+          ))}
+        </ul>
+        <h4 className="font-medium mb-4">Moderation</h4>
+        <ul className="grid gap-2.5">
+          <li className="grid grid-cols-9 gap-4 text-sm font-medium text-white">
+            <span className="col-span-2">Name</span>
+            <span className="col-span-4">Description</span>
+            <span className="col-span-3">Example</span>
+          </li>
+          {moderationCommands.map((command) => (
             <li className="grid grid-cols-9 gap-4" key={command.name}>
               <span className="col-span-2 flex items-center gap-1">
                 <span className="rounded-sm bg-zinc-800 text-white text-xs px-2 h-6 grid place-items-center">

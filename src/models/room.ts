@@ -7,6 +7,7 @@ import { findOrCreateUser } from "@/utils/find-or-create-user";
 import { secondsToString } from "@/utils/seconds-to-string";
 import { getOsuModeName } from "@/utils/get-osu-mode-name";
 import { BeatmapDetails, getBeatmapDetails } from "@/utils/get-beatmap-details";
+import { UserRole, UserRoles } from "@/lib/user-roles";
 
 export interface Room extends RoomOptions {
   id: number;
@@ -26,6 +27,7 @@ export interface RoomMessage {
 export interface RoomCommand {
   name: string;
   shortname?: string;
+  role?: UserRole;
   exec: (user: User, ...args: string[]) => Promise<void>;
 }
 
@@ -150,6 +152,13 @@ export class RoomModel {
         (cmd) => cmd.name === name || cmd.shortname === name
       );
       if (!command) return;
+      if (command.role) {
+        const compareRoles = UserRoles.compare(
+          command.role,
+          user.role as UserRole
+        );
+        if (compareRoles !== 2) return;
+      }
       try {
         await command.exec(user, ...args);
       } catch (error) {

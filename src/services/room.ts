@@ -14,6 +14,7 @@ import { stopCommand } from "../commands/stop";
 import { timeLeftCommand } from "../commands/timeleft";
 import { Bancho } from "@/lib/bancho";
 import { websocket } from "@/lib/websocket";
+import { banCommand } from "@/commands/ban";
 
 const commands = [
   startCommand,
@@ -26,6 +27,7 @@ const commands = [
   timeLeftCommand,
   queuePositionCommand,
   abortCommand,
+  banCommand,
 ];
 
 export class RoomServices {
