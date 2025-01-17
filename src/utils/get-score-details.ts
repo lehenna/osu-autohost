@@ -35,7 +35,7 @@ export async function getScoreDetails(
   const details = await getBasicBeatmapDetails(beatmap);
   return `[${details.downloadLink} ${details.title} [${
     details.difficultyText
-  }]]${modsText} | ${score.rank} ${accuracy.toFixed(
-    2
-  )}% | ${performance.toFixed(0)}pp | ${count}`;
+  }]]${modsText} | ${score.rank} ${accuracy.toFixed(2)}% | x${
+    score.maxCombo
+  }/x${beatmap.maxCombo} | ${performance.toFixed(0)}pp | ${count}`;
 }

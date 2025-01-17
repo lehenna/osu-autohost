@@ -92,6 +92,10 @@ export class RoomModel {
 
     multi.lobby.on("playerJoined", async ({ player: { user: banchoUser } }) => {
       const user = await findOrCreateUser(banchoUser);
+      if (user.banned) {
+        await multi.lobby.kickPlayer(`#${user.id}`);
+        return;
+      }
       if (!this.queue.find((us) => us.id === user.id)) this.queue.push(user);
       websocket.emit("roomUpdated", this.data());
       if (this.host) return;
@@ -270,14 +274,15 @@ export class RoomModel {
   async setTimer(time: number) {
     this.clearTimer();
     if (time > 10) {
-      await this.send(`Queued the match to start in ${time} seconds`);
+      await this.send(
+        `Queued the match to start in ${time} seconds, use !stop to abort.`
+      );
       this.timer = setTimeout(async () => {
-        await this.send(`Match starts in 10 seconds`);
         this.setTimer(10);
       }, (time - 10) * 1000);
       return;
     }
-    await this.send(`Match starts in ${time} seconds`);
+    await this.send(`Match starts in ${time} seconds, use !stop to abort.`);
     this.timer = setTimeout(async () => {
       await this.multi.lobby.startMatch();
     }, time * 1000);
